@@ -12,3 +12,13 @@ Core NATS - Publish Subscribe model
 Core NATS - Queue Subscriptions model  
 ![Queue Subscriptions model](https://683899388-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-LqMYcZML1bsXrN3Ezg0%2Fuploads%2Fgit-blob-e4f2a6428a4be494475b4c811af461ff0908ec2a%2Fqueues.svg?alt=media)
 
+## Reference
+
+[https://docs.nats.io/using-nats/developer/develop_jetstream](https://docs.nats.io/using-nats/developer/develop_jetstream)  
+[https://nats.io/blog/sync-async-publish-java-client/#synchronous-and-asynchronous-publishing-with-the-nats-java-library](https://nats.io/blog/sync-async-publish-java-client/#synchronous-and-asynchronous-publishing-with-the-nats-java-library)
+[https://github.com/nats-io/java-nats-examples/blob/main/hello-world/src/main/java/io/nats/hello/PublishAsync.java](https://github.com/nats-io/java-nats-examples/blob/main/hello-world/src/main/java/io/nats/hello/PublishAsync.java)  
+[https://stackabuse.com/asynchronous-pubsub-messaging-in-java-with-nats-jetstream/](https://stackabuse.com/asynchronous-pubsub-messaging-in-java-with-nats-jetstream/)
+[https://ithelp.ithome.com.tw/articles/10247408](https://ithelp.ithome.com.tw/articles/10247408)  
+[https://stackabuse.com/asynchronous-pubsub-messaging-in-java-with-nats-jetstream/](https://stackabuse.com/asynchronous-pubsub-messaging-in-java-with-nats-jetstream/)  
+[https://engineering.linecorp.com/zh-hant/blog/20210226-golang-event-driven/](https://engineering.linecorp.com/zh-hant/blog/20210226-golang-event-driven/)  
+[https://juejin.cn/post/7088572152303058975](https://juejin.cn/post/7088572152303058975)  
