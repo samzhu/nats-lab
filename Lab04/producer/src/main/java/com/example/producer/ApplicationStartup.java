@@ -18,6 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @RequiredArgsConstructor
 public class ApplicationStartup {
+	private static final String NATS_SERVER_URL = "nats://localhost:4222";
+	private static final String SUBJECTS = "ORDERS.received";
 
 	@EventListener(ApplicationReadyEvent.class)
 	public void afterStartup() throws Exception {
@@ -27,13 +29,13 @@ public class ApplicationStartup {
 	// https://github.com/nats-io/nats.java
 	private void sendMessage() throws Exception {
 		Options options = new Options.Builder()
-				.server("nats://localhost:24222")
+				.server(NATS_SERVER_URL)
 				.reconnectWait(Duration.ofSeconds(1))
 				.build();
 
 		Connection nc = Nats.connect(options);
-		IntStream.range(0, 10)
-				.forEach(i -> nc.publish("subject", ("hello world-" + i).getBytes(StandardCharsets.UTF_8)));
+		IntStream.range(0, 20)
+				.forEach(i -> nc.publish(SUBJECTS, ("hello world-" + i).getBytes(StandardCharsets.UTF_8)));
 		nc.flush(Duration.ZERO);
 		nc.close();
 	}
