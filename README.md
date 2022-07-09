@@ -26,3 +26,5 @@ Core NATS - Queue Subscriptions model
 [https://youtu.be/LZIsYKyv1WA](https://youtu.be/LZIsYKyv1WA)  
 [https://www.gushiciku.cn/pl/aEw8/zh-tw](https://www.gushiciku.cn/pl/aEw8/zh-tw)  
 [https://juejin.cn/post/6952792674655010853](https://juejin.cn/post/6952792674655010853)  
+  
+[https://github.com/nats-io/spring-nats](https://github.com/nats-io/spring-nats)  

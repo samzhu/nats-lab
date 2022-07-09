@@ -41,8 +41,8 @@ public class ApplicationStartup {
 	private static final String NATS_SERVER_URL = "nats://localhost:4222";
 	private static final String STREAM = "ORDERS";
 	private static final String STREAM_SUBJECTS = "ORDERS.*";
-	private static final String SUBJECTS = "ORDERS.received";
-	private static final String CONSUMER = "create_order";
+	private static final String SUBJECTS = "ORDERS.*";
+	private static final String CONSUMER = "create_order_3";
 
 	@EventListener(ApplicationReadyEvent.class)
 	public void afterStartup() throws Exception {
