@@ -21,6 +21,39 @@ services:
     #   - ".docker-data/nats-jet-stream:/data"
     networks: ["nats"]
 
+  prometheus-nats-exporter:
+    image: natsio/prometheus-nats-exporter:latest
+    command:
+      - "-varz"
+      - "http://nats:8222"
+    # volumes:
+    #   - "./prometheus.yml:/etc/prometheus/prometheus.yml"
+    ports:
+      - "7777:7777"
+    networks: ["nats"]
+    depends_on:
+      - nats
+  prometheus:
+    image: prom/prometheus:latest
+    hostname: prometheus
+    volumes:
+      - "./prometheus.yml:/etc/prometheus/prometheus.yml"
+    ports:
+      - "9090:9090"
+    networks: ["nats"]
+  grafana:
+    image: grafana/grafana
+    hostname: grafana
+    ports:
+      - "3000:3000"
+    networks: ["nats"]
+  
+
+
+
+
+
+
 networks:
   nats:
     name: nats

@@ -28,3 +28,6 @@ Core NATS - Queue Subscriptions model
 [https://juejin.cn/post/6952792674655010853](https://juejin.cn/post/6952792674655010853)  
   
 [https://github.com/nats-io/spring-nats](https://github.com/nats-io/spring-nats)  
+
+[https://www.freesion.com/article/9781848819/](https://www.freesion.com/article/9781848819/)  
+[https://github.com/nats-io/spring-nats/blob/main/nats-spring-cloud-stream-binder/src/main/java/io/nats/cloud/stream/binder/NatsMessageProducer.java](https://github.com/nats-io/spring-nats/blob/main/nats-spring-cloud-stream-binder/src/main/java/io/nats/cloud/stream/binder/NatsMessageProducer.java)  

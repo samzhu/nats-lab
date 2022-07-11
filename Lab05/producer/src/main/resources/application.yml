@@ -1,0 +1,24 @@
+# spring.cloud.stream.bindings.input.destination=dataIn
+# spring.cloud.stream.bindings.input.binder=nats
+# spring.cloud.stream.bindings.output.destination=dataOut
+# spring.cloud.stream.bindings.output.binder=nats
+# nats.spring.server=nats://localhost:4222
+
+spring:
+  cloud:
+    stream:
+      bindings:
+        output:
+          destination: orders.created
+          content-type: application/json
+          binder: nats1
+      binders:
+        nats1:
+          type: nats
+          environment:
+            nats:
+              spring:
+                cloud:
+                  stream:
+                    binder:
+                      server: nats://localhost:4222

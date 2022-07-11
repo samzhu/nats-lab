@@ -1,0 +1,22 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: orders.*
+          content-type: application/json
+          # group: one
+          binder: nats1
+      binders:
+        nats1:
+          type: nats
+          environment:
+            nats:
+              spring:
+                cloud:
+                  stream:
+                    binder:
+                      server: nats://localhost:4222
+
+server:
+  port: 0
