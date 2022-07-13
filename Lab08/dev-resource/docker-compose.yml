@@ -1,0 +1,62 @@
+version: "3.8"
+
+services:
+  nats1:
+    container_name: nats1
+    image: "nats:2.8.4"
+    ports:
+      - "14222:4222"
+      - "18222:8222"
+    volumes:
+      - ./nats-1/nats-server.conf:/nats-server.conf
+    networks:
+      - privateBridge
+
+  nats2:
+    container_name: nats2
+    image: "nats:2.8.4"
+    ports:
+      - "24222:4222"
+      - "28222:8222"
+    volumes:
+      - ./nats-2/nats-server.conf:/nats-server.conf
+    networks:
+      - privateBridge
+    depends_on:
+      - nats1
+
+  # https://hub.docker.com/_/mongo
+  mongo1:
+    container_name: mongo1
+    image: 'mongo:4.4.15'
+    restart: always
+    ports:
+      - '27018:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: 'user1'
+      MONGO_INITDB_ROOT_PASSWORD: 'pw123456'
+      MONGO_INITDB_DATABASE: 'devdoc'
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+
+  mongo2:
+    container_name: mongo2
+    image: 'mongo:4.4.15'
+    restart: always
+    ports:
+      - '27019:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: 'user1'
+      MONGO_INITDB_ROOT_PASSWORD: 'pw123456'
+      MONGO_INITDB_DATABASE: 'devdoc'
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+
+networks:
+  privateBridge: {}

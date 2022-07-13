@@ -40,3 +40,4 @@ Core NATS - Queue Subscriptions model
 [https://youtu.be/61aOCovpz5Y](https://youtu.be/61aOCovpz5Y)  
 [https://youtu.be/wOhihZHex8g](https://youtu.be/wOhihZHex8g)  
 [https://youtu.be/NGuiizWUuaw](https://youtu.be/NGuiizWUuaw)
+[https://docs.ksyun.com/documents/41718](https://docs.ksyun.com/documents/41718)
