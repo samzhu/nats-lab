@@ -13,7 +13,7 @@ Core NATS - Queue Subscriptions model
 ![Queue Subscriptions model](https://683899388-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-LqMYcZML1bsXrN3Ezg0%2Fuploads%2Fgit-blob-e4f2a6428a4be494475b4c811af461ff0908ec2a%2Fqueues.svg?alt=media)
 
 ## Reference
-
+[https://nats.io/blog/jetstream-java-client-01-stream-create/](https://nats.io/blog/jetstream-java-client-01-stream-create/)  
 [https://docs.nats.io/using-nats/developer/develop_jetstream](https://docs.nats.io/using-nats/developer/develop_jetstream)  
 [https://nats.io/blog/sync-async-publish-java-client/#synchronous-and-asynchronous-publishing-with-the-nats-java-library](https://nats.io/blog/sync-async-publish-java-client/#synchronous-and-asynchronous-publishing-with-the-nats-java-library)
 [https://github.com/nats-io/java-nats-examples/blob/main/hello-world/src/main/java/io/nats/hello/PublishAsync.java](https://github.com/nats-io/java-nats-examples/blob/main/hello-world/src/main/java/io/nats/hello/PublishAsync.java)  
@@ -31,3 +31,12 @@ Core NATS - Queue Subscriptions model
 
 [https://www.freesion.com/article/9781848819/](https://www.freesion.com/article/9781848819/)  
 [https://github.com/nats-io/spring-nats/blob/main/nats-spring-cloud-stream-binder/src/main/java/io/nats/cloud/stream/binder/NatsMessageProducer.java](https://github.com/nats-io/spring-nats/blob/main/nats-spring-cloud-stream-binder/src/main/java/io/nats/cloud/stream/binder/NatsMessageProducer.java)  
+[https://docs.spring.io/spring-cloud-stream/docs/current/reference/html/spring-cloud-stream.html#_sending_arbitrary_data_to_an_output_e_g_foreign_event_driven_sources](https://docs.spring.io/spring-cloud-stream/docs/current/reference/html/spring-cloud-stream.html#_sending_arbitrary_data_to_an_output_e_g_foreign_event_driven_sources)  
+[https://docs.spring.io/spring-cloud-stream/docs/current/reference/html/spring-cloud-stream.html#_functional_composition](https://docs.spring.io/spring-cloud-stream/docs/current/reference/html/spring-cloud-stream.html#_functional_composition)  
+
+[https://cloudevents.github.io/sdk-java/spring#messaging](https://cloudevents.github.io/sdk-java/spring#messaging)  
+不會用 CloudEvents 的 id  
+[https://github.com/spring-cloud/spring-cloud-function/blob/main/spring-cloud-function-context/src/main/java/org/springframework/cloud/function/cloudevent/CloudEventMessageBuilder.java#L197](https://github.com/spring-cloud/spring-cloud-function/blob/main/spring-cloud-function-context/src/main/java/org/springframework/cloud/function/cloudevent/CloudEventMessageBuilder.java#L197)  
+[https://youtu.be/61aOCovpz5Y](https://youtu.be/61aOCovpz5Y)  
+[https://youtu.be/wOhihZHex8g](https://youtu.be/wOhihZHex8g)  
+[https://youtu.be/NGuiizWUuaw](https://youtu.be/NGuiizWUuaw)

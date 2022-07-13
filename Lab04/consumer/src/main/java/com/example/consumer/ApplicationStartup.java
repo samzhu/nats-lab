@@ -61,6 +61,8 @@ public class ApplicationStartup {
 			this.createConsumer(nc);
 			// 訂閱
 			JetStream js = nc.jetStream();
+			
+
 			// Build our subscription options. Durable is REQUIRED for pull based
 			// subscriptions
 			//

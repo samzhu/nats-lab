@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  nats:
+    container_name: nats
+    image: nats:2.8.4
+    # see https://docs.nats.io/jetstream/getting_started/using_docker
+    command:
+      - "--port"
+      - "4222"
+      - "--http_port"
+      - "8222"
+      - "--jetstream"  # 如果您設置此標誌，jetstream 功能將起作用。
+      - "--store_dir"
+      - "/data"
+      - "--debug"
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+    # volumes:
+    #   - ".docker-data/nats-jet-stream:/data"
+    networks: ["nats"]
+
+networks:
+  nats:
+    name: nats

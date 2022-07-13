@@ -1,0 +1,18 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        stringSupplier-out-0:
+          destination: ORDERS.CREATED
+          content-type: application/json
+          binder: nats1
+      binders:
+        nats1:
+          type: nats
+          environment:
+            nats:
+              spring:
+                cloud:
+                  stream:
+                    binder:
+                      server: nats://localhost:4222
