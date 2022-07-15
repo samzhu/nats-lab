@@ -2,6 +2,49 @@
 
 for lab
 
+## CLI
+
+https://docs.nats.io/using-nats/nats-tools/nats_cli
+
+啟動一個 CLI
+
+``` bash
+docker run --network nats --rm -it synadia/nats-box
+```
+
+建立連線
+
+``` bash
+nats context save local --server nats://nats:4222 --description 'Local Host' --select
+```
+
+列出 Stream
+
+``` bash
+nats str ls
+```
+
+新增 Stream
+
+``` bash
+nats str add ORDERS_STORE \
+    --subjects "ORDERS.*" \
+    --ack \
+    --max-msgs=-1 \
+    --max-bytes=-1 \
+    --max-age=1y \
+    --storage file \
+    --retention limits \
+    --max-msg-size=-1 \
+    --discard old \
+    --dupe-window="0s" \
+    --replicas 1
+```
+
+
+
+
+
 ## Lab01
 
 Core NATS - Publish Subscribe model  
