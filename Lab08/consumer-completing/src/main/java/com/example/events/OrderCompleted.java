@@ -1,4 +1,4 @@
-package com.example.producer;
+package com.example.events;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderCreatedEvent {
+public class OrderCompleted {
     private String orderID;
 }

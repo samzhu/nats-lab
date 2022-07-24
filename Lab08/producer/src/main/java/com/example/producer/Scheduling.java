@@ -1,20 +1,20 @@
 package com.example.producer;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.example.events.OrderReceivedEvent;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import io.nats.client.Connection;
 import io.nats.client.JetStream;
 import io.nats.client.JetStreamApiException;
 import io.nats.client.Message;
 import io.nats.client.api.PublishAck;
-import io.nats.client.impl.Headers;
-import io.nats.client.impl.NatsMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,6 +26,7 @@ public class Scheduling {
     private final String SUBJECT_PUBLISH = "ORDERS.received";
     private final Connection nc;
     private final AppCloudEventMessageUtils appCloudEventMessageUtils;
+    private final ObjectMapper objectMapper;
 
     @Scheduled(initialDelay = 1000, fixedRate = 2000)
     public void sendMessage() throws IOException, JetStreamApiException {
@@ -44,18 +45,28 @@ public class Scheduling {
         // .headers(headers)
         // .build();
 
-        Message message = appCloudEventMessageUtils.convert(SUBJECT_PUBLISH,
-                new OrderCreatedEvent(counter.incrementAndGet() + ""));
+        OrderReceivedEvent orderReceivedEvent = new OrderReceivedEvent(counter.incrementAndGet() + "");
 
-        CompletableFuture<PublishAck> future = jetStream.publishAsync(message);
+        // Message message = appCloudEventMessageUtils.convert(SUBJECT_PUBLISH,
+        //         orderReceivedEvent);
 
-        future.thenAccept((publishAck) -> {
-            if (publishAck.hasError()) {
-                log.error("發送消息失敗");
-            } else {
-                log.info("發送訂單編號");
-            }
-        });
+        PublishAck publishAck = jetStream.publish(SUBJECT_PUBLISH,
+                objectMapper.writeValueAsBytes(orderReceivedEvent));
+        if (publishAck.hasError()) {
+            log.error("發送消息失敗");
+        } else {
+            log.info("發送訂單已接收 {}", orderReceivedEvent);
+        }
+
+        // CompletableFuture<PublishAck> future = jetStream.publishAsync(message);
+
+        // future.thenAccept((publishAck) -> {
+        // if (publishAck.hasError()) {
+        // log.error("發送消息失敗");
+        // } else {
+        // log.info("發送訂單已接收 {}", orderReceivedEvent);
+        // }
+        // });
 
         // PublishAck publishAck = jetStream.publish(SUBJECT_PUBLISH,
         // sb.toString().getBytes(StandardCharsets.UTF_8));
