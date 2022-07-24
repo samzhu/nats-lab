@@ -1,3 +1,7 @@
+spring:
+  application:
+    name: 'consumer-processing'
+
 server:
   port: 0
 

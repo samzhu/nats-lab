@@ -1,22 +1,10 @@
 spring:
-  cloud:
-    stream:
-      bindings:
-        sink-in-0:
-          destination: ORDERS.*
-          # content-type: application/json
-          group: orders
-          binder: nats1
-      binders:
-        nats1:
-          type: nats
-          environment:
-            nats:
-              spring:
-                cloud:
-                  stream:
-                    binder:
-                      server: nats://localhost:4222
+  application:
+    name: 'consumer-monitor'
 
 server:
   port: 0
+
+nats:
+  spring:
+    server: nats://localhost:24222
