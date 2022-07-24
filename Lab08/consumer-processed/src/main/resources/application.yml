@@ -1,0 +1,6 @@
+server:
+  port: 0
+
+nats:
+  spring:
+    server: nats://localhost:24222
