@@ -55,7 +55,7 @@ public class AppCloudEventMessageUtils {
     public Message convert(String subject, Object object) throws JsonProcessingException {
         Headers headers = new Headers();
         headers.add(DEFAULT_ATTR_PREFIX + _ID, NanoIdUtils.randomNanoId());
-        headers.add(DEFAULT_ATTR_PREFIX + _SOURCE, "//projects/order");
+        headers.add(DEFAULT_ATTR_PREFIX + _SOURCE, "//projects/orders");
         headers.add(DEFAULT_ATTR_PREFIX + _SPECVERSION, "1.0");
         headers.add(DEFAULT_ATTR_PREFIX + _TYPE, object.getClass().getName());
         headers.add(DEFAULT_ATTR_PREFIX + _TIME, OffsetDateTime.now().toString());

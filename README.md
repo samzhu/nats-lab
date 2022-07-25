@@ -202,4 +202,21 @@ NATS + Cloudevent
 [https://youtu.be/61aOCovpz5Y](https://youtu.be/61aOCovpz5Y)  
 [https://youtu.be/wOhihZHex8g](https://youtu.be/wOhihZHex8g)  
 [https://youtu.be/NGuiizWUuaw](https://youtu.be/NGuiizWUuaw)
-[https://docs.ksyun.com/documents/41718](https://docs.ksyun.com/documents/41718)
+[https://docs.ksyun.com/documents/41718](https://docs.ksyun.com/documents/41718)  
+[https://bootify.io/mongodb/offset-date-time-with-spring-boot-mongodb.html](https://bootify.io/mongodb/offset-date-time-with-spring-boot-mongodb.html)
+
+## mongo
+
+``` js
+db.orders.find({})
+   .projection({})
+   .sort({time:-1})
+   .limit(100)
+```
+
+``` js
+db.orders.find({ orderID: "12"})
+   .projection({})
+   .sort({_id:-1})
+   .limit(100)
+```
