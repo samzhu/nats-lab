@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  # https://hub.docker.com/_/postgres
+  postgres:
+    image: 'postgres:14.4'
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: 'user1'
+      POSTGRES_PASSWORD: 'pw123456'
+      POSTGRES_DB: 'devdb'
+    # volumes:
+    #   - dbData:/var/lib/postgresql/data
+    networks:
+      - privateBridge
+    logging:
+      driver: json-file
+      options:
+        max-size: 20m
+        max-file: '2'
+
+  # https://hub.docker.com/_/mongo
+  mongo1:
+    container_name: mongo1
+    image: 'mongo:4.4.15'
+    restart: always
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: 'user1'
+      MONGO_INITDB_ROOT_PASSWORD: 'pw123456'
+      MONGO_INITDB_DATABASE: 'devdoc'
+    volumes:
+      - ./init-mongodb:/docker-entrypoint-initdb.d
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+
+networks:
+  privateBridge:
+    name: nats
