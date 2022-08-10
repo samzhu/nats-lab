@@ -1,29 +1,45 @@
 version: "3.8"
 
 services:
-  # https://hub.docker.com/_/postgres
-  postgres:
-    image: 'postgres:14.4'
-    restart: always
+  # # https://hub.docker.com/_/postgres
+  # postgres:
+  #   image: 'postgres:14.4'
+  #   restart: always
+  #   ports:
+  #     - '5432:5432'
+  #   environment:
+  #     POSTGRES_USER: 'user1'
+  #     POSTGRES_PASSWORD: 'pw123456'
+  #     POSTGRES_DB: 'devdb'
+  #   # volumes:
+  #   #   - dbData:/var/lib/postgresql/data
+  #   networks:
+  #     - privateBridge
+  #   logging:
+  #     driver: json-file
+  #     options:
+  #       max-size: 20m
+  #       max-file: '2'
+
+  nats:
+    container_name: nats
+    image: nats:2.8.4
+    command:
+      - "--port"
+      - "4222"
+      - "--http_port"
+      - "8222"
+      - "--jetstream"  # 如果您設置此標誌，jetstream 功能將起作用。
+      - "--store_dir"
+      - "/data"
+      - "--debug"
     ports:
-      - '5432:5432'
-    environment:
-      POSTGRES_USER: 'user1'
-      POSTGRES_PASSWORD: 'pw123456'
-      POSTGRES_DB: 'devdb'
-    # volumes:
-    #   - dbData:/var/lib/postgresql/data
-    networks:
-      - privateBridge
-    logging:
-      driver: json-file
-      options:
-        max-size: 20m
-        max-file: '2'
+      - "4222:4222"
+      - "8222:8222"
 
   # https://hub.docker.com/_/mongo
-  mongo1:
-    container_name: mongo1
+  mongo:
+    container_name: mongo
     image: 'mongo:4.4.15'
     restart: always
     ports:

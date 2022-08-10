@@ -10,15 +10,18 @@ import com.example.domain.events.AccountCreatedEvent;
 import com.example.domain.valueobjects.BalanceVO;
 import com.example.internal.outboundservices.AccountOutBound;
 
-@Document(collection = "accounts")
 public class AccountAggregate {
-    @Transient
+    // @Transient
     private AccountOutBound accountOutBound;
 
-    @Id
+    // @Id
     private String accountID;
-    @Field("balance")
+    // @Field("balance")
     private BalanceVO balanceVO;
+
+    public AccountAggregate(AccountOutBound accountOutBound) {
+        this.accountOutBound = accountOutBound;
+    }
 
     public void on(CreateAccountCommand createAccountCommand) {
         AccountCreatedEvent accountCreatedEvent = new AccountCreatedEvent();
