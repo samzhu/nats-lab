@@ -1,37 +1,39 @@
 package com.example.domain.aggregates;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
+import java.io.IOException;
+import java.time.LocalDateTime;
 
+import com.aventrix.jnanoid.jnanoid.NanoIdUtils;
 import com.example.domain.commands.CreateAccountCommand;
 import com.example.domain.events.AccountCreatedEvent;
 import com.example.domain.valueobjects.BalanceVO;
-import com.example.internal.outboundservices.AccountOutBound;
+import com.example.internal.outboundservices.EventOutBound;
+
 
 public class AccountAggregate {
     // @Transient
-    private AccountOutBound accountOutBound;
+    private EventOutBound eventOutBound;
 
     // @Id
     private String accountID;
     // @Field("balance")
-    private BalanceVO balanceVO;
+    private Integer balance;
 
-    public AccountAggregate(AccountOutBound accountOutBound) {
-        this.accountOutBound = accountOutBound;
+    public AccountAggregate(EventOutBound eventOutBound) {
+        this.eventOutBound = eventOutBound;
     }
 
-    public void on(CreateAccountCommand createAccountCommand) {
+    public void on(CreateAccountCommand createAccountCommand) throws IOException {
         AccountCreatedEvent accountCreatedEvent = new AccountCreatedEvent();
+        accountCreatedEvent.setEventID(NanoIdUtils.randomNanoId());
         accountCreatedEvent.setAccountID(createAccountCommand.getAccountID());
-        accountCreatedEvent.setBalanceVO(new BalanceVO(0));
-        accountOutBound.publish(accountCreatedEvent);
+        accountCreatedEvent.setBalance(0);
+        accountCreatedEvent.setTime(LocalDateTime.now());
+        eventOutBound.publish(accountCreatedEvent);
     }
 
-    public void on(AccountCreatedEvent accountCreatedEvent) {
+    public void on(AccountCreatedEvent accountCreatedEvent) throws IOException {
         this.accountID = accountCreatedEvent.getAccountID();
-        this.balanceVO = accountCreatedEvent.getBalanceVO();
+        this.balance = accountCreatedEvent.getBalance();
     }
 }
