@@ -51,7 +51,6 @@ public class NatsStream {
         return subscription;
     }
 
-
     public void createStream(String stream, String subject) throws IOException, JetStreamApiException {
         JetStreamManagement jsm = nc.jetStreamManagement();
         if (!jsm.getStreamNames().contains(stream)) {
@@ -59,7 +58,7 @@ public class NatsStream {
             StreamConfiguration streamConfiguration = StreamConfiguration.builder()
                     .name(stream)
                     .subjects(subject)
-                    .retentionPolicy(RetentionPolicy.WorkQueue)
+                    // .retentionPolicy(RetentionPolicy.WorkQueue)
                     .storageType(StorageType.Memory)
                     .replicas(1)
                     .discardPolicy(DiscardPolicy.Old)
@@ -74,8 +73,7 @@ public class NatsStream {
              * LimitsPolicy: 依據訊息數量 存儲空間 新舊消息
              * WorkQueuePolicy: 消息在被消費之前一直保留
              * InterestPolicy: 只要有消費者處於活躍狀態，消息就會被保存下來
-             * ref
-             * https://docs.nats.io/using-nats/developer/develop_jetstream/model_deep_dive
+             * ref https://docs.nats.io/using-nats/developer/develop_jetstream/model_deep_dive
              * storageType: 消息的存儲方式，有file和memory兩種
              * replicas: 消息在集群中的副本數量，只有集群才用得到，最大值為5
              * discardPolicy: 丟棄策略，默認為DiscardOld，即消息存儲到達上限時，將老的消息刪除

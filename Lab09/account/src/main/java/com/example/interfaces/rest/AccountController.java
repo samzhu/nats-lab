@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.domain.commands.CreateAccountCommand;
+import com.example.domain.commands.DepositMoneyCommand;
 import com.example.interfaces.dto.CreateAccountReqDTO;
 import com.example.interfaces.dto.CreateAccountResDTO;
+import com.example.interfaces.dto.DepositMoneyReqDTO;
 import com.example.interfaces.transform.AccountAssembler;
 import com.example.internal.commandgateways.AccountCommandGateway;
 
@@ -35,6 +37,14 @@ public class AccountController {
         CreateAccountCommand createAccountCommand = accountAssembler.toCreateCartCommand(createAccountReqDTO);
         accountCommandGateway.createAccount(createAccountCommand);
         return createAccountResDTO;
+    }
+
+    @PostMapping(path = "")
+    public void depositMoney(@RequestBody DepositMoneyReqDTO depositMoneyReqDTO) throws IOException {
+        log.info("收到 depositMoneyReqDTO={}", depositMoneyReqDTO);
+        CreateAccountResDTO createAccountResDTO = new CreateAccountResDTO();
+        DepositMoneyCommand depositMoneyCommand = accountAssembler.toDepositMoneyCommand(depositMoneyReqDTO);
+        // accountCommandGateway.createAccount(createAccountCommand);
 
     }
 }

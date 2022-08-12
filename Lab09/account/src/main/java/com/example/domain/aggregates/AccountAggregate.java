@@ -5,19 +5,27 @@ import java.time.LocalDateTime;
 
 import com.aventrix.jnanoid.jnanoid.NanoIdUtils;
 import com.example.domain.commands.CreateAccountCommand;
+import com.example.domain.commands.DepositMoneyCommand;
 import com.example.domain.events.AccountCreatedEvent;
-import com.example.domain.valueobjects.BalanceVO;
+import com.example.domain.events.MoneyDepositedEvent;
 import com.example.internal.outboundservices.EventOutBound;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Data;
 
+@Data
 public class AccountAggregate {
     // @Transient
+    @JsonIgnore
     private EventOutBound eventOutBound;
 
     // @Id
     private String accountID;
     // @Field("balance")
     private Integer balance;
+
+    public AccountAggregate() {
+    }
 
     public AccountAggregate(EventOutBound eventOutBound) {
         this.eventOutBound = eventOutBound;
@@ -36,4 +44,18 @@ public class AccountAggregate {
         this.accountID = accountCreatedEvent.getAccountID();
         this.balance = accountCreatedEvent.getBalance();
     }
+
+    public void on(DepositMoneyCommand depositMoneyCommand) throws IOException {
+        MoneyDepositedEvent event = new MoneyDepositedEvent();
+        event.setEventID(NanoIdUtils.randomNanoId());
+        event.setAccountID(depositMoneyCommand.getAccountID());
+        event.setAmountOfDeposited(0);
+        event.setTime(LocalDateTime.now());
+        // eventOutBound.publish(accountCreatedEvent);
+    }
+
+
+
+
+    
 }

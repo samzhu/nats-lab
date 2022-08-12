@@ -8,8 +8,8 @@ import lombok.Data;
 /**
  * 建立帳號命令
  */
-@AllArgsConstructor
 @Data
+@AllArgsConstructor
 public class CreateAccountCommand {
     private String accountID;
     private Integer balance;
