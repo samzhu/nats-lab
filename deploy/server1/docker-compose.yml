@@ -1,0 +1,57 @@
+version: "3.8"
+
+services:
+
+  app:
+    image: ghcr.io/samzhu/nats-lab/account-test:7
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - privateBridge
+
+  nats:
+    container_name: nats
+    image: nats:2.8.4
+    restart: always
+    command:
+      # - "--debug"
+      - "--http_port"
+      - "8222"
+      - "--port"
+      - "4222"
+      - "--jetstream"
+      - "--cluster_name"
+      - "c1"
+      - "--cluster" 
+      - "nats://0.0.0.0:6222"
+      - "--routes" 
+      - "nats://127.0.0.1:6222"
+      - "--name" # server_name
+      - "c1-n1"
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+      - "6222:6222"
+    networks:
+      - privateBridge
+
+  mongo:
+    container_name: mongo
+    image: 'mongo:4.4.15'
+    restart: always
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: 'user1'
+      MONGO_INITDB_ROOT_PASSWORD: 'pw123456'
+      MONGO_INITDB_DATABASE: 'devdoc'
+    volumes:
+      - ./init-mongodb:/docker-entrypoint-initdb.d
+    networks:
+      - privateBridge
+
+
+networks:
+  privateBridge:
+    driver: bridge
