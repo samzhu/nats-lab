@@ -3,38 +3,13 @@ version: "3.8"
 services:
 
   app:
+    container_name: app
     image: ghcr.io/samzhu/nats-lab/account-test:10
     restart: always
     environment:
       spring.profiles.active : 'compose'
     ports:
       - "8080:8080"
-    networks:
-      - privateBridge
-
-  nats:
-    container_name: nats
-    image: nats:2.8.4
-    restart: always
-    command:
-      # - "--debug"
-      - "--http_port"
-      - "8222"
-      - "--port"
-      - "4222"
-      - "--jetstream"
-      - "--cluster_name"
-      - "c1"
-      - "--cluster" 
-      - "nats://0.0.0.0:6222"
-      - "--routes" 
-      - "nats://127.0.0.1:6222"
-      - "--name" # server_name
-      - "c1-n1"
-    ports:
-      - "4222:4222"
-      - "8222:8222"
-      - "6222:6222"
     networks:
       - privateBridge
 
@@ -53,7 +28,31 @@ services:
     networks:
       - privateBridge
 
+  nats:
+    container_name: nats
+    image: "nats:2.8.4"
+    restart: always
+    command:
+      # - "--debug"
+      - "--http_port"
+      - "8222"
+      - "--port"
+      - "4222"
+      - "--jetstream"
+      - "--cluster_name"
+      - "c1"
+      - "--cluster" 
+      - "nats://0.0.0.0:6222"
+      - "--routes" 
+      - "nats://${ROUTE_DOMAIN}:6222"
+      - "--name"
+      - "${SERVER_NAME}"
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+    networks:
+      - privateBridge
 
 networks:
   privateBridge:
-    driver: bridge
+    name: demo-net

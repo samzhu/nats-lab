@@ -1,0 +1,56 @@
+version: "3.8"
+
+services:
+  nats1:
+    container_name: nats1
+    image: "nats:2.8.4"
+    command:
+      # - "--debug"
+      - "--http_port"
+      - "8222"
+      - "--port"
+      - "4222"
+      - "--jetstream"
+      - "--cluster_name"
+      - "c1"
+      - "--cluster" 
+      - "nats://0.0.0.0:6222"
+      - "--routes" 
+      - "nats://127.0.0.1:6222"
+      - "--name" # server_name
+      - "c1-n1"
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+    networks:
+      - privateBridge
+
+  nats2:
+    container_name: nats2
+    image: "nats:2.8.4"
+    command:
+      # - "--debug"
+      - "--http_port"
+      - "8222"
+      - "--port"
+      - "4222"
+      - "--jetstream"
+      - "--cluster_name"
+      - "c1"
+      - "--cluster" 
+      - "nats://0.0.0.0:6222"
+      - "--routes" 
+      - "nats://nats1:6222"
+      - "--name" # server_name
+      - "c1-n2"
+    ports:
+      - "24222:4222"
+      - "28222:8222"
+    networks:
+      - privateBridge
+    depends_on:
+      - nats1
+
+networks:
+  privateBridge:
+    name: demo-net
