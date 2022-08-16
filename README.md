@@ -1,4 +1,5 @@
 # NATS-lab
+[![Java CI with Gradle](https://github.com/samzhu/nats-lab/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/samzhu/nats-lab/actions/workflows/main.yml)  
 
 for lab
 https://docs.nats.io/nats-concepts/jetstream/consumers/example_configuration
