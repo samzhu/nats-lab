@@ -22,11 +22,11 @@ jobs:
     - name: Grant execute permission for gradlew
       working-directory: ./lab-release/account
       run: chmod +x gradlew
-    - name: Build with Gradle
-      env:
-        USERNAME: $GITHUB_ACTOR
-        TOKEN: ${{ github.token }}
-      run: ./gradlew build publish
+    # - name: Build with Gradle
+    #   env:
+    #     USERNAME: $GITHUB_ACTOR
+    #     TOKEN: ${{ github.token }}
+    #   run: ./gradlew build publish
     - name: Login Docker
       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
     - name: Build Docker Image
