@@ -43,6 +43,7 @@ bin/
 !**/application-dev.yml
 !**/application-dev-secret.yml
 !**/application-unittest.yml
+!**/application-compose.yml
 
 **/application-*.properties
 !**/application-dev.properties
