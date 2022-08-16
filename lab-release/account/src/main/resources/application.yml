@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: 'account'
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: devdoc
+      username: user1
+      password: pw123456
+
+# server:
+#   port: 0
+
+nats:
+  spring:
+    server: nats://localhost:4222
+
+data-center:
+  id: ${random.int[1,256]}
