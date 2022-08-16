@@ -19,13 +19,8 @@ jobs:
       with:
         distribution: 'liberica'
         java-version: '17'
-    - name: Test
-      run: ls && pwd
-    - name: Switch to workspace
-      run: cd lab-release/account
-    - name: Test
-      run: ls && pwd
     - name: Grant execute permission for gradlew
+      working-directory: ./lab-release/account
       run: chmod +x gradlew
     - name: Build with Gradle
       env:
